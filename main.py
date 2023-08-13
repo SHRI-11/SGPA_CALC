@@ -46,19 +46,19 @@ def create_win(w_width, w_height):
 
 def phase1():
     global entry1
-    Label(frame, text="SGPA Calculator").place(relx=0.5, rely=0.3, anchor=CENTER)
-    Label(frame, text="Enter the number of subjects below:").place(relx=0.5, rely=0.4, anchor=CENTER)
-    entry1 = Entry(frame, width=14)
+    Label(window, text="SGPA Calculator").place(relx=0.5, rely=0.3, anchor=CENTER)
+    Label(window, text="Enter the number of subjects below:").place(relx=0.5, rely=0.4, anchor=CENTER)
+    entry1 = Entry(window, width=14)
     entry1.focus()
     entry1.place(relx=0.5, rely=0.5, anchor=CENTER)
-    button1 = Button(frame, text="Enter", command=phase2, width=12)
+    button1 = Button(window, text="Enter", command=phase2, width=12)
     button1.place(relx=0.5, rely=0.6, anchor=CENTER)
 
 
 def phase2():
     global num_sub
     num_sub = int(entry1.get())
-    for wid in frame.winfo_children():
+    for wid in window.winfo_children():
         wid.destroy()
     width = 300
     height = 50*(num_sub+1)
@@ -66,12 +66,12 @@ def phase2():
     div = 1.0/(num_sub+2)
     y = div
     for n in range(num_sub):
-        Label(frame, text=f"Enter subject {n + 1}: ").place(relx=0.25, rely=y, anchor=CENTER)
-        sentry = Entry(frame, width=15)
+        Label(window, text=f"Enter subject {n + 1}: ").place(relx=0.25, rely=y, anchor=CENTER)
+        sentry = Entry(window, width=15)
         sentry.place(relx=0.75, rely=y, anchor=CENTER)
         all_sval.append(sentry)
         y += div
-    Button(frame, text="Enter", command=phase3, width=12).place(relx=0.5, rely=y, anchor=CENTER)
+    Button(window, text="Enter", command=phase3, width=12).place(relx=0.5, rely=y, anchor=CENTER)
 
 
 def phase3():
@@ -80,28 +80,28 @@ def phase3():
     data = {}
     for n in range(num_sub):
         all_sval[n] = all_sval[n].get()
-    for wid in frame.winfo_children():
+    for wid in window.winfo_children():
         wid.destroy()
     width = 400
     height = 50*(num_sub+2)
     create_win(width, height)
     div = 1.0 / (num_sub + 4)
     y = div
-    Label(frame, text="Subjects").place(relx=0.125, rely=y, anchor=CENTER)
-    Label(frame, text="Credits").place(relx=0.375, rely=y, anchor=CENTER)
-    Label(frame, text="Marks").place(relx=0.625, rely=y, anchor=CENTER)
-    Label(frame, text="Grade").place(relx=0.875, rely=y, anchor=CENTER)
+    Label(window, text="Subjects").place(relx=0.125, rely=y, anchor=CENTER)
+    Label(window, text="Credits").place(relx=0.375, rely=y, anchor=CENTER)
+    Label(window, text="Marks").place(relx=0.625, rely=y, anchor=CENTER)
+    Label(window, text="Grade").place(relx=0.875, rely=y, anchor=CENTER)
     y += div
     for n in range(num_sub):
-        Label(frame, text=f"{all_sval[n]}: ").place(relx=0.125, rely=y, anchor=CENTER)
-        centry = Entry(frame, width=15)
+        Label(window, text=f"{all_sval[n]}: ").place(relx=0.125, rely=y, anchor=CENTER)
+        centry = Entry(window, width=15)
         centry.place(relx=0.375, rely=y, anchor=CENTER)
         credit_entries.append(centry)
-        mentry = Entry(frame, width=15)
+        mentry = Entry(window, width=15)
         mentry.place(relx=0.625, rely=y, anchor=CENTER)
         marks_entries.append(mentry)
         y += div
-    calc = Button(frame, text="Calculate", command=phase4, width=12)
+    calc = Button(window, text="Calculate", command=phase4, width=12)
     calc.place(relx=0.5, rely=y, anchor=CENTER)
 
 
@@ -120,19 +120,17 @@ def phase4():
     div = 1.0 / (num_sub + 4)
     y = div*2
     for key, value in data.items():
-        Label(frame, text=value[2]).place(relx=0.875, rely=y, anchor=CENTER)
+        Label(window, text=value[2]).place(relx=0.875, rely=y, anchor=CENTER)
         y += div
-    Label(frame, text=f"Your SGPA is {sgpa_calc(data)}").place(relx=0.5, rely=y+div, anchor=CENTER)
+    Label(window, text=f"Your SGPA is {sgpa_calc(data)}").place(relx=0.5, rely=y+div, anchor=CENTER)
     calc.destroy()
-    calc = Button(frame, text="Calculate", command=phase4, width=12)
+    calc = Button(window, text="Calculate", command=phase4, width=12)
     calc.place(relx=0.5, rely=y, anchor=CENTER)
 
 
 window = Tk()
 window.title("SGPA Calculator")
 create_win(300, 270)
-frame = Frame(window)
-frame.pack(side="top", expand=True, fill="both")
 
 
 phase1()
