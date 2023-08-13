@@ -40,7 +40,7 @@ def create_win(w_width, w_height):
     s_width = window.winfo_screenwidth()
     s_height = window.winfo_screenheight()
     x = s_width//2 - w_width//2
-    y = s_height//2 - w_height//2
+    y = s_height//2 - w_height//2 - 100
     window.geometry(f"{w_width}x{w_height}+{x}+{y}")
 
 
